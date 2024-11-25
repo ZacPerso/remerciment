@@ -33,17 +33,14 @@
         <span></span>
         <span></span>
         <span></span>
-        <!-- Ajoute tes autres spans pour l'animation -->
     </div>
 
     <!-- Section de bienvenue -->
     <section id="welcome">
         <div class="message-3d">Bienvenue Lâlia</div>
         <div class="click-indicator" onclick="scrollToVideo()">Click</div> <!-- Texte "Click" clignotant -->
-        <!-- Triangles à gauche et à droite du texte -->
         <div class="scroll-indicator" onclick="scrollToVideo()">↓</div>
     </section>
-
 
     <div class="keypad-section" id="keypad-section">
         <div class="keypad">
@@ -64,14 +61,20 @@
             </div>
         </div>
     </div>
-    
-
 
     <!-- Section vidéo avec fond noir -->
     <div class="video-section" id="video">
-        <video controls width="100%" id="video-player">
-            Votre navigateur ne supporte pas la vidéo HTML5.
-        </video>
+        <!-- Remplacez VIDEO_ID par l'identifiant de votre vidéo YouTube -->
+        <iframe 
+            id="youtube-player" 
+            width="100%" 
+            height="80%" 
+            src="" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
     </div>
 
     <script>
@@ -89,9 +92,9 @@
             const data = await response.json();
 
             if (data.success) {
-                const videoUrl = data.videoUrl;
-                const videoPlayer = document.getElementById("video-player");
-                videoPlayer.src = videoUrl; // Met à jour la source de la vidéo avec l'URL reçue
+                const videoUrl = data.videoUrl; // L'URL doit inclure un lien YouTube valide
+                const youtubePlayer = document.getElementById("youtube-player");
+                youtubePlayer.src = videoUrl; // Définir la source de l'iframe
                 hideKeypadAndShowVideo();
             } else {
                 alert("Code invalide.");
@@ -103,7 +106,7 @@
             codeEntered += number;
             document.getElementById("code-input").value = codeEntered;
             if (codeEntered.length === 6) {
-                getVideoUrl(codeEntered); // Call to backend to verify code
+                getVideoUrl(codeEntered); // Appel au backend pour vérifier le code
             }
         }
 
@@ -123,28 +126,21 @@
         }
 
         function submitCode() {
-            if (codeEntered.length === 5) {
-                getVideoUrl(codeEntered); // Call to backend to verify code
+            if (codeEntered.length === 6) {
+                getVideoUrl(codeEntered); // Appel au backend pour vérifier le code
             } else {
-                alert("Le code doit contenir 5 chiffres.");
+                alert("Le code doit contenir 6 chiffres.");
             }
         }
-
 
         function scrollToVideo() {
             const videoSection = document.getElementById("video-section");
             videoSection.scrollIntoView({ behavior: "smooth" });
-            const video = document.querySelector('video');
-            video.play();
         }
 
         document.querySelector('.scroll-indicator').addEventListener('click', scrollToVideo);
-
-        
     </script>
-
 
     <script src="script.js"></script>
 </body>
 </html>
-
