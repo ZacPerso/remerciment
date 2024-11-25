@@ -45,6 +45,28 @@
     </section>
 
 
+    <div class="keypad-section" id="keypad-section">
+        <div class="keypad">
+            <input type="password" id="code-input" maxlength="5" placeholder="Entrez le code" />
+            <div class="keypad-buttons">
+                <button onclick="enterKey(1)">1</button>
+                <button onclick="enterKey(2)">2</button>
+                <button onclick="enterKey(3)">3</button>
+                <button onclick="enterKey(4)">4</button>
+                <button onclick="enterKey(5)">5</button>
+                <button onclick="enterKey(6)">6</button>
+                <button onclick="enterKey(7)">7</button>
+                <button onclick="enterKey(8)">8</button>
+                <button onclick="enterKey(9)">9</button>
+                <button onclick="enterKey(0)">0</button>
+                <button onclick="clearInput()">Clear</button>
+                <button class="enter-button" onclick="submitCode()">Enter</button>
+            </div>
+        </div>
+    </div>
+    
+
+
     <!-- Section vidéo avec fond noir -->
     <div class="video-section" id="video">
         <video controls width="100%" id="video-player">
@@ -53,6 +75,8 @@
     </div>
 
     <script>
+        let codeEntered = "";
+
         async function getVideoUrl(code) {
             const response = await fetch('https://remerciment-back-phi.vercel.app/api/verify', {
                 method: 'POST',
@@ -68,33 +92,57 @@
                 const videoUrl = data.videoUrl;
                 const videoPlayer = document.getElementById("video-player");
                 videoPlayer.src = videoUrl; // Met à jour la source de la vidéo avec l'URL reçue
-                alert("Code valide! La vidéo est prête à être lue.");
-                console.log(videoPlayer.src)
+                hideKeypadAndShowVideo();
             } else {
                 alert("Code invalide.");
+                clearInput();
             }
         }
 
-        // Appel de la fonction getVideoUrl avec le code de validation
-        const code = prompt("Entrez votre code secret:");
-        if (code) {
-            getVideoUrl(code);
+        function enterKey(number) {
+            codeEntered += number;
+            document.getElementById("code-input").value = codeEntered;
+            if (codeEntered.length === 6) {
+                getVideoUrl(codeEntered); // Call to backend to verify code
+            }
         }
 
+        function clearInput() {
+            codeEntered = "";
+            document.getElementById("code-input").value = "";
+        }
+
+        function showKeypad() {
+            document.getElementById("keypad-section").style.display = "block";
+        }
+
+        function hideKeypadAndShowVideo() {
+            document.getElementById("keypad-section").style.display = "none";
+            document.getElementById("video-section").style.display = "block";
+            scrollToVideo();
+        }
+
+        function submitCode() {
+            if (codeEntered.length === 5) {
+                getVideoUrl(codeEntered); // Call to backend to verify code
+            } else {
+                alert("Le code doit contenir 5 chiffres.");
+            }
+        }
+
+
         function scrollToVideo() {
-            const videoSection = document.getElementById("video");
+            const videoSection = document.getElementById("video-section");
             videoSection.scrollIntoView({ behavior: "smooth" });
             const video = document.querySelector('video');
             video.play();
         }
 
         document.querySelector('.scroll-indicator').addEventListener('click', scrollToVideo);
-        window.addEventListener("load", () => {
-            setTimeout(() => {
-                window.scrollTo(0, 0);
-            }, 0);
-        });
+
+        
     </script>
+
 
     <script src="script.js"></script>
 </body>

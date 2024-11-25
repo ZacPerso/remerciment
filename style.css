@@ -120,6 +120,69 @@ body, html {
     z-index: 1;
 }
 
+#keypad-section {
+    height: 90vh;
+    background-color: black; /* Fond noir pour la section vidéo */
+    position: relative;
+    z-index: 1;
+    padding: 10% 0;
+    text-align: center;
+    color: white;
+}
+
+.keypad {
+    background: linear-gradient(135deg, #4CAF50, #45a049); /* Gradient background for better visuals */
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow for depth */
+    width: 320px;
+    margin: 0 auto;
+}
+
+.keypad input {
+    font-size: 24px;
+    padding: 12px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.keypad-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.keypad-buttons button {
+    font-size: 22px;
+    padding: 15px;
+    background: linear-gradient(135deg, #007BFF, #0056b3); /* Vibrant gradient for buttons */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.keypad-buttons button:hover {
+    background: linear-gradient(135deg, #0056b3, #003d80); /* Darker on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); /* Enhanced shadow */
+}
+
+.keypad-buttons button:active {
+    transform: translateY(2px); /* Press effect */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); /* Reduced shadow */
+}
+
+
 #video {
     height: 90vh;
     background-color: black; /* Fond noir pour la section vidéo */

@@ -1,6 +1,6 @@
 // Fonction pour scroller vers la vidéo et la lancer
 function scrollToVideo() {
-    const videoSection = document.getElementById("video");
+    const videoSection = document.getElementById("keypad-section");
     videoSection.scrollIntoView({ behavior: "smooth" }); // Défilement fluide
 
     // Lance la vidéo automatiquement
