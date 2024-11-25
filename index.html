@@ -47,12 +47,54 @@
 
     <!-- Section vidéo avec fond noir -->
     <div class="video-section" id="video">
-        <video controls width="100%">
-            <source src="zac.mp4" type="video/mp4">
+        <video controls width="100%" id="video-player">
             Votre navigateur ne supporte pas la vidéo HTML5.
         </video>
     </div>
-    
+
+    <script>
+        async function getVideoUrl(code) {
+            const response = await fetch('https://remerciment-back-phi.vercel.app/api/verify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code }),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                const videoUrl = data.videoUrl;
+                const videoPlayer = document.getElementById("video-player");
+                videoPlayer.src = videoUrl; // Met à jour la source de la vidéo avec l'URL reçue
+                alert("Code valide! La vidéo est prête à être lue.");
+                console.log(videoPlayer.src)
+            } else {
+                alert("Code invalide.");
+            }
+        }
+
+        // Appel de la fonction getVideoUrl avec le code de validation
+        const code = prompt("Entrez votre code secret:");
+        if (code) {
+            getVideoUrl(code);
+        }
+
+        function scrollToVideo() {
+            const videoSection = document.getElementById("video");
+            videoSection.scrollIntoView({ behavior: "smooth" });
+            const video = document.querySelector('video');
+            video.play();
+        }
+
+        document.querySelector('.scroll-indicator').addEventListener('click', scrollToVideo);
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+            }, 0);
+        });
+    </script>
 
     <script src="script.js"></script>
 </body>
