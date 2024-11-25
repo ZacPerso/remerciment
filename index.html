@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merci</title>
+
+    <!-- Ajouter un emoji directement comme favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><text x='0' y='14' font-size='14' font-family='Arial' fill='black'>🌸</text></svg>">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Arrière-plan animé uniquement pour la section bienvenue -->
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <!-- Ajoute tes autres spans pour l'animation -->
+    </div>
+
+    <!-- Section de bienvenue -->
+    <section id="welcome">
+        <div class="message-3d">Bienvenue Lâlia</div>
+        <div class="click-indicator" onclick="scrollToVideo()">Click</div> <!-- Texte "Click" clignotant -->
+        <!-- Triangles à gauche et à droite du texte -->
+        <div class="scroll-indicator" onclick="scrollToVideo()">↓</div>
+    </section>
+
+
+    <!-- Section vidéo avec fond noir -->
+    <div class="video-section" id="video">
+        <video controls width="100%">
+            <source src="zac.mp4" type="video/mp4">
+            Votre navigateur ne supporte pas la vidéo HTML5.
+        </video>
+    </div>
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
+
