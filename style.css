@@ -3,6 +3,7 @@ body, html {
     padding: 0;
     font-family: Arial, sans-serif;
     overflow: hidden;
+    height: 100%;
 }
 
 /* Arrière-plan animé uniquement dans la section de bienvenue */
@@ -36,12 +37,9 @@ body, html {
     }
 }
 
-
 /* Texte "Click" clignotant */
-/* Ajouter une police stylée */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
 
-/* Texte "Click" avec effet fragmenté et clignotant */
 .click-indicator {
     font-size: 4rem;  /* Augmenter la taille du texte pour le rendre plus visible */
     color: white;
@@ -91,12 +89,6 @@ body, html {
     transform: translateX(-50%);
     cursor: pointer;
     user-select: none;
-}
-
-/* Animation de clignotement */
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
 }
 
 /* Animation de flottement */
@@ -182,7 +174,6 @@ body, html {
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); /* Reduced shadow */
 }
 
-
 #video {
     height: 90vh;
     background-color: black; /* Fond noir pour la section vidéo */
@@ -234,6 +225,70 @@ video {
     max-width: 80%;
     border-radius: 10px;
 }
+
+/* Mobile Specific Adjustments */
+@media only screen and (max-width: 768px) {
+    .click-indicator {
+        font-size: 2.5rem; /* Smaller text on mobile */
+        bottom: 100px;
+    }
+
+    .scroll-indicator {
+        font-size: 4rem;
+    }
+
+    .message-3d {
+        font-size: 4rem; /* Smaller text for mobile */
+    }
+
+    .keypad {
+        width: 300px; /* Adjust keypad width */
+        padding: 50px;
+    }
+
+    .keypad input {
+        font-size: 18px;
+    }
+
+    .keypad-buttons button {
+        font-size: 18px;
+        padding: 12px;
+    }
+
+    .video-section video {
+        max-width: 100%; /* Full width on mobile */
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .click-indicator {
+        font-size: 2rem; /* Even smaller text on very small screens */
+        bottom: 80px;
+    }
+
+    .scroll-indicator {
+        font-size: 3rem;
+    }
+
+    .message-3d {
+        font-size: 3rem; /* Reduce further for small screens */
+    }
+
+    .keypad {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .keypad input {
+        font-size: 16px;
+    }
+
+    .keypad-buttons button {
+        font-size: 16px;
+        padding: 10px;
+    }
+}
+
 
 .background span:nth-child(0) {
     color: #E45A84;
