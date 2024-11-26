@@ -123,7 +123,7 @@ body, html {
 }
 
 .keypad {
-    background: linear-gradient(135deg, #4CAF50, #45a049); /* Gradient background for better visuals */
+    background: linear-gradient(135deg, #382f2c, #382f2c); /* Gradient background for better visuals */
     padding: 50px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow for depth */
