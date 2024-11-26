@@ -470,3 +470,26 @@ video {
     transform-origin: 6vw 6vh;
     box-shadow: -40vmin 0 5.705613101149065vmin currentColor;
 }
+
+
+@import url(https://fonts.googleapis.com/css?family=Montserrat:700);
+
+.word {
+    height: 250px;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    color: #FFACAC;
+    font: 700 normal 4em/1.5 'Montserrat', sans-serif;
+    text-shadow: 1px 2px #E45A84, 
+                2px 4px #E45A84, 
+                3px 6px #E45A84, 
+                4px 8px #E45A84, 
+                5px 10px #E45A84, 
+                6px 12px #E45A84, 
+                7px 14px #E45A84, 
+                8px 16px #E45A84, 
+                9px 18px #E45A84, 
+                10px 20px #E45A84;
+}
