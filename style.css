@@ -101,6 +101,14 @@ body, html {
     }
 }
 
+#youtube-player {
+    border-radius: 25px; /* Adjust the value for more or less rounding */
+    overflow: hidden; /* Ensures the content inside respects the rounded corners */
+    border: 2px solid #000; /* Optional: Add a border for better visibility */
+  }
+
+  
+
 /* Transition entre les sections */
 #welcome {
     height: 100vh;
@@ -114,7 +122,6 @@ body, html {
 
 #keypad-section {
     height: 90vh;
-    background-color: black; /* Fond noir pour la section vidéo */
     position: relative;
     z-index: 1;
     padding: 10% 0;
@@ -183,7 +190,6 @@ body, html {
 
 #video {
     height: 90vh;
-    background-color: black; /* Fond noir pour la section vidéo */
     position: relative;
     z-index: 1;
 }
@@ -222,7 +228,6 @@ body, html {
 }
 
 .video-section {
-    background: #000; /* Fond noir pour la section vidéo */
     padding: 50px 0;
     text-align: center;
     color: white;
@@ -482,21 +487,192 @@ video {
 @import url(https://fonts.googleapis.com/css?family=Montserrat:700);
 
 .word {
-    height: 250px;
+    height: 80px;
     display: flex; 
     justify-content: center;
     align-items: center;
     margin: auto;
-    color: #FFACAC;
+    color: #ff85b3; /* Bright pink for a girly theme */
     font: 700 normal 4em/1.5 'Montserrat', sans-serif;
-    text-shadow: 1px 2px #E45A84, 
-                2px 4px #E45A84, 
-                3px 6px #E45A84, 
-                4px 8px #E45A84, 
-                5px 10px #E45A84, 
-                6px 12px #E45A84, 
-                7px 14px #E45A84, 
-                8px 16px #E45A84, 
-                9px 18px #E45A84, 
-                10px 20px #E45A84;
+    text-shadow: 1px 2px #ffc1d6, 
+                 2px 4px #ffc1d6, 
+                 3px 6px #ffc1d6, 
+                 4px 8px #ffc1d6, 
+                 5px 10px #ffc1d6, 
+                 6px 12px #ffc1d6, 
+                 7px 14px #ffc1d6, 
+                 8px 16px #ffc1d6, 
+                 9px 18px #ffc1d6, 
+                 10px 20px #ffc1d6;
+}
+
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrolling during loader */
+  }
+  
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures it overlays everything */
+  }
+  
+  .container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .container div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    height: 90%;
+    width: 90%;
+    border-radius: 50%;
+    border-right: 9px solid rgba(0, 0, 0, 0.8);
+    animation: spinning 2s linear infinite; /* Loader spins for 2 seconds */
+  }
+  
+  @keyframes spinning {
+    0% {
+      transform: rotate(0deg);
+      border-right-color: rgba(0, 0, 0, 0.6);
+    }
+    50% {
+      transform: rotate(180deg);
+      border-right-color: rgba(0, 0, 0, 0.4);
+    }
+    100% {
+      transform: rotate(360deg);
+      border-right-color: rgba(0, 0, 0, 0.6);
+    }
+  }
+  
+  /* Hide the rest of the content initially */
+  .content {
+    display: none;
+  }
+  
+
+
+/* Navbar Container */@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+
+/* General Reset */
+.navbar * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Wrapper for Navigation */
+.navbar .wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(-135deg, #c850c0, #ff85b3);
+    clip-path: circle(25px at calc(100% - 45px) 45px);
+    transition: all 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+/* Wrapper Expands on Active */
+.navbar #active:checked ~ .wrapper {
+    clip-path: circle(75%);
+}
+
+/* Hamburger Menu Button */
+.navbar .menu-btn {
+    position: fixed;
+    z-index: 1001;
+    right: 20px;
+    top: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    background: linear-gradient(-135deg, #c850c0, #ff85b3);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Change Hamburger Menu Appearance When Open */
+.navbar #active:checked ~ .menu-btn {
+    background: #fff;
+    color: #4158d0;
+}
+
+.navbar #active:checked ~ .menu-btn i:before {
+    content: "\f00d"; /* Cross Icon */
+}
+
+/* Navigation Links */
+.navbar .wrapper ul {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+}
+
+.navbar .wrapper ul li {
+    margin: 15px 0;
+}
+
+.navbar .wrapper ul li a {
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: 500;
+    padding: 5px 30px;
+    color: #fff;
+    position: relative;
+    line-height: 50px;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect for Links */
+.navbar .wrapper ul li a:after {
+    position: absolute;
+    content: "";
+    background: #fff;
+    width: 100%;
+    height: 50px;
+    left: 0;
+    border-radius: 50px;
+    transform: scaleY(0);
+    z-index: -1;
+    transition: transform 0.3s ease;
+}
+
+.navbar .wrapper ul li a:hover:after {
+    transform: scaleY(1);
+}
+
+.navbar .wrapper ul li a:hover {
+    color: #4158d0;
+}
+
+/* Hide Checkbox Input */
+.navbar input[type="checkbox"] {
+    display: none;
 }

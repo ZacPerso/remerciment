@@ -1,16 +1,37 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merci</title>
 
     <!-- Ajouter un emoji directement comme favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><text x='0' y='14' font-size='14' font-family='Arial' fill='black'>🌸</text></svg>">
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><text x='0' y='14' font-size='14' font-family='Arial' fill='black'>🌸</text></svg>">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/5bfa30b5d1.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
+
+    <div class="navbar">
+
+        <input type="checkbox" id="active">
+        <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
+
+        <!-- Fullscreen Wrapper -->
+        <div class="wrapper">
+            <ul>
+                <li><a href="#welcome">Acceuil</a></li>
+                <li><a href="./anniversaire.html">Anniversaire</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+
     <!-- Arrière-plan animé uniquement pour la section bienvenue -->
     <div class="background">
         <span></span>
@@ -35,49 +56,56 @@
         <span></span>
     </div>
 
-    <!-- Section de bienvenue -->
-    <section id="welcome">
-        <div class="message-3d">Bienvenue Lâlia</div>
-        <div class="click-indicator" onclick="scrollToVideo()">Click</div> <!-- Texte "Click" clignotant -->
-        <div class="scroll-indicator" onclick="scrollToVideo()">↓</div>
-    </section>
-
-    <div class="keypad-section" id="keypad-section">
-        <div class="keypad">
-            <input type="password" id="code-input" maxlength="5" placeholder="Entrez le code" />
-            <div class="keypad-buttons">
-                <button onclick="enterKey(1)">1</button>
-                <button onclick="enterKey(2)">2</button>
-                <button onclick="enterKey(3)">3</button>
-                <button onclick="enterKey(4)">4</button>
-                <button onclick="enterKey(5)">5</button>
-                <button onclick="enterKey(6)">6</button>
-                <button onclick="enterKey(7)">7</button>
-                <button onclick="enterKey(8)">8</button>
-                <button onclick="enterKey(9)">9</button>
-                <button onclick="enterKey(0)">0</button>
-                <button onclick="clearInput()">Clear</button>
-                <button class="enter-button" onclick="submitCode()">Enter</button>
-            </div>
+    <!-- Loader -->
+    <div class="loader">
+        <div class="container">
+            <div></div>
         </div>
     </div>
 
-    <!-- Section vidéo avec fond noir -->
-    <div class="video-section" id="video">
-        <!-- Remplacez VIDEO_ID par l'identifiant de votre vidéo YouTube -->
-        <iframe 
-            id="youtube-player" 
-            width="100%" 
-            height="80%" 
-            src="" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
+    <!-- Main Content -->
+    <div class="content">
 
-        <div class="word"></div>
+        <div class="keypad-section" id="keypad-section">
+            <div class="keypad">
+                <input type="password" id="code-input" maxlength="5" placeholder="Entrez le code" />
+                <div class="keypad-buttons">
+                    <button onclick="enterKey(1)">1</button>
+                    <button onclick="enterKey(2)">2</button>
+                    <button onclick="enterKey(3)">3</button>
+                    <button onclick="enterKey(4)">4</button>
+                    <button onclick="enterKey(5)">5</button>
+                    <button onclick="enterKey(6)">6</button>
+                    <button onclick="enterKey(7)">7</button>
+                    <button onclick="enterKey(8)">8</button>
+                    <button onclick="enterKey(9)">9</button>
+                    <button onclick="enterKey(0)">0</button>
+                    <button onclick="clearInput()">Clear</button>
+                    <button class="enter-button" onclick="submitCode()">Enter</button>
+                </div>
+            </div>
+        </div>
 
+
+        <!-- Section de bienvenue -->
+        <section id="welcome">
+            <div class="message-3d">Bienvenue Lâlia</div>
+            <div class="click-indicator" onclick="scrollToVideo()">Click</div> <!-- Texte "Click" clignotant -->
+            <div class="scroll-indicator" onclick="scrollToVideo()">↓</div>
+        </section>
+
+
+
+        <div class="video-section" id="video">
+            <!-- Remplacez VIDEO_ID par l'identifiant de votre vidéo YouTube -->
+            <iframe id="youtube-player" width="90%" height="90%" src="" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+            <div class="word"></div>
+
+        </div>
     </div>
 
     <script>
@@ -97,8 +125,11 @@
             if (data.success) {
                 const videoUrl = data.videoUrl; // L'URL doit inclure un lien YouTube valide
                 const youtubePlayer = document.getElementById("youtube-player");
+                localStorage.setItem('videoUrl', videoUrl);
                 youtubePlayer.src = videoUrl; // Définir la source de l'iframe
+                document.cookie = `access_granted=true; path=/; max-age=3600; SameSite=Strict`;
                 hideKeypadAndShowVideo();
+
             } else {
                 alert("Code invalide.");
                 clearInput();
@@ -124,8 +155,7 @@
 
         function hideKeypadAndShowVideo() {
             document.getElementById("keypad-section").style.display = "none";
-            document.getElementById("video-section").style.display = "block";
-            scrollToVideo();
+            document.getElementById("video").style.display = "block";
         }
 
         function submitCode() {
@@ -146,4 +176,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

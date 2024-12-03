@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merci</title>
+
+    <!-- Ajouter un emoji directement comme favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><text x='0' y='14' font-size='14' font-family='Arial' fill='black'>🌸</text></svg>">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style_anniversaire.css">
+    <script src="https://kit.fontawesome.com/5bfa30b5d1.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <input type="checkbox" id="active">
+        <label for="active" class="menu-btn"><i class="fas fa-bars"></i></label>
+
+        <!-- Fullscreen Wrapper -->
+        <div class="wrapper">
+            <ul>
+                <li><a href="./index.html">Acceuil</a></li>
+                <li><a href="#">Anniversaire</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Arrière-plan animé -->
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+
+    <!-- Loader -->
+    <div class="loader">
+        <div class="container">
+            <div></div>
+        </div>
+    </div>
+
+    <div class="content">
+
+        
+    <!-- Countdown Section -->
+    <div class="countdown">
+        <h2>Décompte jusqu'au 6 janvier 2025</h2>
+        <div id="countdown-timer">
+            <span id="days">00</span> <span>jours</span>
+            <span id="hours">00</span> <span>heures</span>
+            <span id="minutes">00</span> <span>minutes</span>
+            <span id="seconds">00</span> <span>secondes</span>
+        </div>
+    </div>
+
+
+
+    <!-- Message et formulaire -->
+    <div class="form-container">
+        <p>Prévenez-moi quand c'est l'heure ! Entrez votre adresse email :</p>
+        <p id="confirmationMessage"></p>
+        <form id="emailForm">
+            <input type="email" id="email" placeholder="Entrez votre email" required>
+            <button type="submit" id="sendEmail">Envoyer</button>
+        </form>
+    </div>
+    </div>
+
+    <script src="countdown.js"></script>
+    <script>
+        // Lorsque le formulaire est soumis
+        document.getElementById("emailForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+        
+            const email = document.getElementById("email").value; // Get the email value
+            const confirmationMessage = document.getElementById("confirmationMessage"); // Message element
+        
+            // Make sure email is provided
+            if (!email) {
+                confirmationMessage.innerText = "Veuillez entrer une adresse email valide.";
+                confirmationMessage.style.color = "red";
+                return;
+            }
+        
+            // Send the email via the server
+            fetch("https://remerciment-back-phi.vercel.app/api/notify", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    confirmationMessage.innerText = data.message;
+                    confirmationMessage.style.color = "green";
+                } else {
+                    confirmationMessage.innerText = data.message;
+                    confirmationMessage.style.color = "red";
+                }
+            })
+            .catch(error => {
+                console.error("Error sending email:", error);
+                confirmationMessage.innerText = "Une erreur est survenue. Essayez à nouveau.";
+                confirmationMessage.style.color = "red";
+            });
+        });
+        
+    </script>
+</body>
+
+</html>

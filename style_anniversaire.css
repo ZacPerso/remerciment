@@ -1,0 +1,390 @@
+/* Reset default margins and paddings */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    height: 100%;
+}
+
+/* Arrière-plan animé */
+.background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: #ffae9d;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.background span {
+    width: 20vmin;
+    height: 20vmin;
+    border-radius: 50%;
+    position: absolute;
+    animation: move 45s linear infinite;
+    animation-delay: calc(-1s * var(--i));
+}
+
+@keyframes move {
+    100% {
+        transform: translate3d(0, 0, 1px) rotate(360deg);
+    }
+}
+
+/* Section du décompte */
+.countdown {
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+    margin-top: 20vh;
+    text-shadow: 0 0 10px #ff72d0, 0 0 20px #ff72d0, 0 0 30px #ff72d0;
+    animation: countdownAnimation 1s ease-in-out infinite;
+}
+
+@keyframes countdownAnimation {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+#countdown-timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 4rem;
+    color: white;
+    letter-spacing: 1px;
+}
+
+#countdown-timer span {
+    margin: 0 10px;
+    color: white;
+}
+
+/* Animation pour les chiffres du décompte */
+#days, #hours, #minutes, #seconds {
+    font-size: 6rem;
+    color: #fff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+    animation: bounce 1.5s infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+/* Arrière-plan des boutons */
+.button {
+    background-color: #E45A84;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: #FFACAC;
+    transform: translateY(-5px);
+}
+
+.button:active {
+    transform: translateY(2px);
+    background-color: #ff85b3;
+}
+
+/* Animation de message */
+.message {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    color: white;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevents scrolling during loader */
+  }
+  
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures it overlays everything */
+  }
+  
+  .container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .container div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    height: 90%;
+    width: 90%;
+    border-radius: 50%;
+    border-right: 9px solid rgba(0, 0, 0, 0.8);
+    animation: spinning 2s linear infinite; /* Loader spins for 2 seconds */
+  }
+  
+  @keyframes spinning {
+    0% {
+      transform: rotate(0deg);
+      border-right-color: rgba(0, 0, 0, 0.6);
+    }
+    50% {
+      transform: rotate(180deg);
+      border-right-color: rgba(0, 0, 0, 0.4);
+    }
+    100% {
+      transform: rotate(360deg);
+      border-right-color: rgba(0, 0, 0, 0.6);
+    }
+  }
+  
+  /* Hide the rest of the content initially */
+  .content {
+    display: none;
+  }
+  
+
+/* Media Queries pour mobile */
+@media only screen and (max-width: 768px) {
+    .countdown {
+        font-size: 2rem;
+    }
+
+    #countdown-timer {
+        font-size: 3rem;
+    }
+
+    .message {
+        font-size: 1.5rem;
+        bottom: 120px;
+    }
+
+    .button {
+        font-size: 1rem;
+        padding: 10px 20px;
+    }
+}
+
+
+
+/* General Reset */
+.navbar * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Wrapper for Navigation */
+.navbar .wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(-135deg, #c850c0, #ff85b3);
+    clip-path: circle(25px at calc(100% - 45px) 45px);
+    transition: all 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+/* Wrapper Expands on Active */
+.navbar #active:checked ~ .wrapper {
+    clip-path: circle(75%);
+}
+
+/* Hamburger Menu Button */
+.navbar .menu-btn {
+    position: fixed;
+    z-index: 1001;
+    right: 20px;
+    top: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    background: linear-gradient(-135deg, #c850c0, #ff85b3);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Change Hamburger Menu Appearance When Open */
+.navbar #active:checked ~ .menu-btn {
+    background: #fff;
+    color: #4158d0;
+}
+
+.navbar #active:checked ~ .menu-btn i:before {
+    content: "\f00d"; /* Cross Icon */
+}
+
+/* Navigation Links */
+.navbar .wrapper ul {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    list-style: none;
+    text-align: center;
+}
+
+.navbar .wrapper ul li {
+    margin: 15px 0;
+}
+
+.navbar .wrapper ul li a {
+    text-decoration: none;
+    font-size: 30px;
+    font-weight: 500;
+    padding: 5px 30px;
+    color: #fff;
+    position: relative;
+    line-height: 50px;
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect for Links */
+.navbar .wrapper ul li a:after {
+    position: absolute;
+    content: "";
+    background: #fff;
+    width: 100%;
+    height: 50px;
+    left: 0;
+    border-radius: 50px;
+    transform: scaleY(0);
+    z-index: -1;
+    transition: transform 0.3s ease;
+}
+
+.navbar .wrapper ul li a:hover:after {
+    transform: scaleY(1);
+}
+
+.navbar .wrapper ul li a:hover {
+    color: #4158d0;
+}
+
+/* Hide Checkbox Input */
+.navbar input[type="checkbox"] {
+    display: none;
+}
+
+/* Style du formulaire */
+/* Style du formulaire */
+.form-container {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: #fff;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 25px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-container p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.form-container input {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #ff72d0;
+    background-color: #fff;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* Effet lors du focus sur l'input */
+.form-container input:focus {
+    outline: none;
+    border-color: #ff85e1;
+    box-shadow: 0 0 10px rgba(255, 72, 208, 0.5);
+}
+
+/* Style du bouton */
+.form-container button {
+    padding: 12px 30px;
+    background-color: #ff72d0;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-container button:hover {
+    background-color: #ff85e1;
+    transform: translateY(-2px);
+}
+
+.form-container button:active {
+    background-color: #ff60b2;
+    transform: translateY(2px);
+}
+
+#confirmationMessage {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    color: #b2ffb2;
+    font-weight: 600;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+/* Animation de fade-in pour le message de confirmation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

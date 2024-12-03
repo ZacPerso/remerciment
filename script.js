@@ -1,12 +1,11 @@
 // Fonction pour scroller vers la vidéo et la lancer
 function scrollToVideo() {
-    const videoSection = document.getElementById("keypad-section");
+    const videoSection = document.getElementById("video");
     videoSection.scrollIntoView({ behavior: "smooth" }); // Défilement fluide
 
     // Lance la vidéo automatiquement
     const video = document.querySelector('video');
     wordflick();
-    video.play();
 }
 
 // Gestion du clic sur la flèche
@@ -26,15 +25,15 @@ window.addEventListener("load", () => {
 
 
 var
-  words = ['Baraka Allahu fiki','Merci beaucoup','Tu es la meilleure'],
+  words = ['Baraka Allahu fiki', 'Merci beaucoup', 'Tu es la meilleure'],
   part,
   i = 0,
   offset = 0,
   len = words.length,
   forwards = true,
   skip_count = 0,
-  skip_delay = 5,
-  speed = 100;
+  skip_delay = 20, // Longer pause when fully displayed
+  speed = 100; // Smoother and slower typing effect
 
 var wordflick = function(){
   setInterval(function(){
@@ -53,7 +52,7 @@ var wordflick = function(){
             i++;
             offset = 0;
             if(i >= len){
-              i=0;
+              i = 0;
             } 
          }
       }
@@ -66,6 +65,33 @@ var wordflick = function(){
           offset--;
         }
       }
-    	$('.word').text(part);
-  },speed);
+      $('.word').text(part);
+  }, speed);
 };
+window.addEventListener('load', () => {
+  // Check for the 'access_granted' cookie
+  const isAccessGranted = document.cookie.split('; ').some(cookie => cookie.startsWith('access_granted='));
+
+  // If the cookie is valid, hide the keypad and show the video
+  if (isAccessGranted) {
+    hideKeypadAndShowVideo();
+    const youtubePlayer = document.getElementById("youtube-player");
+    youtubePlayer.src = localStorage.getItem('videoUrl');
+  }
+
+  // After 2 seconds (or desired delay), hide the loader and show the content
+  setTimeout(() => {
+    document.querySelector('.loader').style.display = 'none'; // Hide loader
+    document.querySelector('.content').style.display = 'block'; // Show content
+    document.body.style.overflow = ''; // Re-enable scrolling
+  }, 2000); // 2-second delay
+});
+
+
+function toggleMenu() {
+  const hamburger = document.querySelector('.hamburger');
+  const navbar = document.querySelector('.navbar');
+
+  hamburger.classList.toggle('open');
+  navbar.classList.toggle('open');
+}
